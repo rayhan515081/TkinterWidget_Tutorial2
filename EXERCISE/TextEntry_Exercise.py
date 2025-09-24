@@ -11,3 +11,4 @@ Text_entry = ttk.Entry(master = window, textvariable = string_var, font = 'Calib
 Text_entry.pack();
 
 window.mainloop()
+# test 
