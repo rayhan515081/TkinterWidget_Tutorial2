@@ -1,36 +1,60 @@
 import tkinter as tk
 from tkinter import ttk
 
-def update_label(*args):
-    value = value_var.get()
-    display_label.config(text=f"Selected Value: {value}")
-
-#This section creates the Tkinter window and adds the required elemnts to it
+# Create the main window
 window = tk.Tk()
-window.title("Tkinter Spinbox Widget")
+window.title("Spinbox with Subjects")
 window.geometry("400x400")
 
+# ---------- Numeric Spinbox Section ----------
 value_var = tk.DoubleVar()
-value_var.trace_add("write", update_label)  
 
+# Label for numeric value
+display_label = ttk.Label(window, text="Selected Value: 0.00", font='Calibri 16 bold')
+display_label.pack(pady=10)
+
+# Update label when number changes
+def update_number_label(*args):
+    value = value_var.get()
+    display_label.config(text=f"Selected Value: {value:.2f}")
+
+value_var.trace_add("write", update_number_label)
+
+# Numeric spinbox
 number_spinbox = ttk.Spinbox(
     window,
     from_=0,
     to=100,
     increment=0.01,
     textvariable=value_var,
-    font='Calibri 24 bold'
+    font='Calibri 18'
 )
-number_spinbox.pack(pady=20)
+number_spinbox.pack(pady=10)
 
-Number_spinbox = ttk.spinbox('Maths','English','Science','Computing','Latin','Arabic','Social Studies','Sports Science')
+# ---------- Subject Spinbox Section ----------
+subjects = ("Math", "Science", "English", "History", "Art", "Computer Science")
+subject_var = tk.StringVar(value=subjects[0])  # Default value
 
-#This is our spinbox
-int_var = tk.IntVar()
-Number_Spinbox = ttk.Spinbox(window, from_=0, to=100, increment=.01, textvariable = int_var, font = 'Calibri 24 bold')
+# Label for selected subject
+subject_label = ttk.Label(window, text=f"Selected Subject: {subjects[0]}", font='Calibri 16 bold')
+subject_label.pack(pady=10)
 
-#Pack elements in frames ready to push onto form/window
-Number_Spinbox.pack
+# Update label when subject changes
+def update_subject_label(*args):
+    subject = subject_var.get()
+    subject_label.config(text=f"Selected Subject: {subject}")
 
-#run the program to generate window with all packed elements for user interaction
+subject_var.trace_add("write", update_subject_label)
+
+# Subject spinbox
+subject_spinbox = ttk.Spinbox(
+    window,
+    values=subjects,
+    textvariable=subject_var,
+    wrap=True,
+    font='Calibri 18'
+)
+subject_spinbox.pack(pady=10)
+
+# Run the app
 window.mainloop()
