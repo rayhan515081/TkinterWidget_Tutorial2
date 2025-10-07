@@ -6,7 +6,6 @@ window = tk.Tk()
 window.title("Spinbox with Subjects")
 window.geometry("400x400")
 
-# ---------- Numeric Spinbox Section ----------
 value_var = tk.DoubleVar()
 
 # Label for numeric value
@@ -21,14 +20,7 @@ def update_number_label(*args):
 value_var.trace_add("write", update_number_label)
 
 # Numeric spinbox
-number_spinbox = ttk.Spinbox(
-    window,
-    from_=0,
-    to=100,
-    increment=0.01,
-    textvariable=value_var,
-    font='Calibri 18'
-)
+number_spinbox = ttk.Spinbox(window,from_=0,to=100,increment=0.01,textvariable=value_var,font='Calibri 18')
 number_spinbox.pack(pady=10)
 
 # ---------- Subject Spinbox Section ----------
